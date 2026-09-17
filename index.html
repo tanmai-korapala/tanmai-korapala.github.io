@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tanmai</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --desk:#F7F5F0;
+    --ink:#24211D;
+    --pencil:#8B867C;
+    --lilac:#A98BE8;
+    --lilac-deep:#7F5FD6;
+    --tilt:-4deg;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:var(--desk);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}
+  .desk{position:relative;width:100vw;height:100vh;height:100dvh}
+
+  .hello{position:absolute;left:46%;top:46%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:1}
+  .hello h1{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(46px,8.5vw,104px);line-height:.95;color:var(--lilac);transition:color .25s}
+  .hello p{margin-top:10px;font-size:13px;letter-spacing:.02em;color:var(--pencil)}
+  .desk:hover .hello h1{color:var(--lilac-deep)}
+
+  .item{position:absolute;display:block;text-decoration:none;color:inherit;transition:transform .3s ease;will-change:transform}
+  .item:hover,.item:focus-visible{transform:rotate(var(--tilt)) scale(1.05);outline:none;z-index:2}
+  .item img,.item svg{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 16px rgba(40,30,20,.22))}
+  .item .cap{position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);white-space:nowrap;font-family:"Caveat",cursive;font-size:22px;color:var(--lilac-deep);opacity:0;transition:opacity .2s}
+  .item:hover .cap,.item:focus-visible .cap{opacity:1}
+
+  .notepad {left:10%;top:12%;width:clamp(110px,14vw,190px);--tilt:-6deg}
+  .folder  {left:9%; top:58%;width:clamp(120px,15vw,200px);--tilt:5deg}
+  .laptop  {left:70%;top:4%; width:clamp(170px,19vw,270px);--tilt:3deg;transform:rotate(6deg)}
+  .laptop:hover,.laptop:focus-visible{transform:rotate(9deg) scale(1.05)}
+  .phone   {left:80%;top:58%;width:clamp(70px,8vw,110px);--tilt:-7deg;transform:rotate(-12deg)}
+  .phone:hover,.phone:focus-visible{transform:rotate(-19deg) scale(1.05)}
+  .speaker {left:40%;top:70%;width:clamp(140px,16vw,220px);--tilt:5deg;transform:rotate(-5deg)}
+  .speaker:hover,.speaker:focus-visible{transform:rotate(0deg) scale(1.05)}
+
+  @media (max-width:640px){
+    .hello{top:42%}
+    .notepad{left:6%;top:7%;width:34vw}
+    .folder{left:6%;top:64%;width:36vw}
+    .laptop{left:50%;top:6%;width:46vw}
+    .phone{left:70%;top:58%;width:22vw}
+    .speaker{left:36%;top:78%;width:40vw}
+  }
+  @media (prefers-reduced-motion:reduce){.item,.hello h1,.cap{transition:none}}
+</style>
+</head>
+<body>
+<main class="desk">
+
+  <div class="hello">
+    <h1>hi, i'm Tanmai!</h1>
+    <p>welcome to my desk. click around.</p>
+  </div>
+
+  <a class="item notepad" href="about.html" aria-label="About me">
+    <svg viewBox="0 0 190 150">
+      <rect x="14" y="14" width="162" height="124" rx="4" fill="#FFFDF6"/>
+      <rect x="14" y="14" width="162" height="12" fill="#E9E4D6"/>
+      <g fill="#A9A395"><circle cx="38" cy="20" r="2.5"/><circle cx="66" cy="20" r="2.5"/><circle cx="94" cy="20" r="2.5"/><circle cx="122" cy="20" r="2.5"/><circle cx="150" cy="20" r="2.5"/></g>
+      <g stroke="#DCE6F2" stroke-width="1.5"><line x1="26" y1="48" x2="164" y2="48"/><line x1="26" y1="66" x2="164" y2="66"/><line x1="26" y1="84" x2="164" y2="84"/><line x1="26" y1="102" x2="164" y2="102"/><line x1="26" y1="120" x2="164" y2="120"/></g>
+      <line x1="40" y1="30" x2="40" y2="138" stroke="#F0B9B9" stroke-width="1.5"/>
+      <text x="48" y="61" font-family="Caveat" font-size="18" fill="var(--lilac-deep)">about me</text>
+    </svg>
+    <span class="cap">about me</span>
+  </a>
+
+  <a class="item folder" href="projects.html" aria-label="Projects">
+    <svg viewBox="0 0 200 150">
+      <path d="M10 30 h60 l14 14 h106 v96 a8 8 0 0 1 -8 8 h-164 a8 8 0 0 1 -8 -8 z" fill="#C9A56F"/>
+      <rect x="10" y="60" width="180" height="88" rx="8" fill="#DEBE8B"/>
+      <text x="100" y="112" text-anchor="middle" font-family="Caveat" font-size="22" fill="var(--ink)">projects</text>
+    </svg>
+    <span class="cap">projects</span>
+  </a>
+
+  <a class="item laptop" href="resume.html" aria-label="Resume">
+    <img src="images/laptop.png" alt="My laptop">
+    <span class="cap">resume</span>
+  </a>
+
+  <a class="item phone" href="travel.html" aria-label="Travel">
+    <img src="images/phone.png" alt="My phone">
+    <span class="cap">travel</span>
+  </a>
+
+  <a class="item speaker" href="dance.html" aria-label="Dance">
+    <img src="images/speaker.png" alt="My speaker">
+    <span class="cap">dance</span>
+  </a>
+
+</main>
+</body>
+</html>

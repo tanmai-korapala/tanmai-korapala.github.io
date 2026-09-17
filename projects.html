@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects · Tanmai</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--desk:#F7F5F0;--ink:#24211D;--pencil:#8B867C;--lilac:#A98BE8;--lilac-deep:#7F5FD6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:var(--desk);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}
+  .top{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;font-size:13px;color:var(--pencil)}
+  .top a{color:var(--lilac-deep);text-decoration:none;font-family:"Caveat",cursive;font-size:22px}
+  .top a:hover{text-decoration:underline}
+  .head{max-width:900px;margin:0 auto;padding:0 24px}
+  h1{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(44px,7vw,72px);color:var(--lilac);line-height:1}
+  .head p{margin-top:6px;color:var(--pencil);font-size:15px}
+
+  .board{position:relative;max-width:900px;height:640px;margin:24px auto 40px}
+  .scrap{
+    position:absolute;padding:14px 22px;background:#FFFDF7;color:var(--ink);text-decoration:none;
+    font-family:"Caveat",cursive;font-size:26px;line-height:1.1;white-space:nowrap;
+    transform:rotate(var(--r,0deg));cursor:grab;user-select:none;touch-action:none;
+    box-shadow:0 6px 14px rgba(40,30,20,.16);
+    clip-path:polygon(2% 6%,20% 0,45% 5%,70% 1%,98% 4%,100% 40%,97% 70%,100% 96%,75% 100%,50% 94%,25% 100%,0 95%,3% 60%);
+  }
+  .scrap small{display:block;font-family:"DM Sans",sans-serif;font-size:11px;color:var(--pencil);margin-top:2px}
+  .scrap.lift{box-shadow:0 16px 30px rgba(40,30,20,.24);z-index:10}
+  .scrap:hover{background:#F3ECFF}
+
+  /* plain list under the board for phones and screen readers */
+  .list{max-width:640px;margin:0 auto 100px;padding:0 24px;display:none}
+  .list a{display:block;padding:14px 0;border-top:1px solid #E4DFD4;color:var(--ink);text-decoration:none}
+  .list a:hover{color:var(--lilac-deep)}
+  .list a small{display:block;font-size:13px;color:var(--pencil);margin-top:2px}
+  @media (max-width:700px){.board{display:none}.list{display:block}.head p.hint{display:none}}
+</style>
+</head>
+<body>
+<div class="top">
+  <a href="index.html">← back to my desk</a>
+</div>
+
+<div class="head">
+  <h1>things i've worked on.</h1>
+  <p class="hint">drag to move, tap to open.</p>
+</div>
+
+<div class="board">
+  <a class="scrap" href="projects/wayfair.html" style="left:6%;top:6%;--r:-4deg">Wayfair<small>returns network optimization</small></a>
+  <a class="scrap" href="projects/general-motors.html" style="left:50%;top:3%;--r:3deg">General Motors<small>48 dealerships, 3 districts</small></a>
+  <a class="scrap" href="projects/dbaasnow.html" style="left:28%;top:24%;--r:-2deg">DBaasNow<small>growth strategy for a startup</small></a>
+  <a class="scrap" href="projects/pine-point.html" style="left:66%;top:28%;--r:5deg">Pine Point Medical<small>consumer IV market entry</small></a>
+  <a class="scrap" href="projects/wise-street.html" style="left:4%;top:40%;--r:2deg">Wise Street Capital<small>investor-ready market sizing</small></a>
+  <a class="scrap" href="projects/iha.html" style="left:40%;top:48%;--r:-3deg">Ithaca Health Alliance<small>donor strategy for the board</small></a>
+  <a class="scrap" href="projects/hershey.html" style="left:72%;top:54%;--r:3deg">Hershey<small>battle of the brands</small></a>
+  <a class="scrap" href="projects/barnes-noble.html" style="left:12%;top:68%;--r:-5deg">Barnes &amp; Noble<small>why bookstores survived</small></a>
+  <a class="scrap" href="projects/xbox.html" style="left:44%;top:76%;--r:4deg">Xbox Game Trials<small>try before you buy</small></a>
+  <a class="scrap" href="projects/disney-vail.html" style="left:68%;top:80%;--r:-3deg">Disney x Vail<small>a winter partnership</small></a>
+</div>
+
+<div class="list">
+  <a href="projects/wayfair.html">Wayfair<small>returns network optimization</small></a>
+  <a href="projects/general-motors.html">General Motors<small>48 dealerships, 3 districts</small></a>
+  <a href="projects/dbaasnow.html">DBaasNow<small>growth strategy for a startup</small></a>
+  <a href="projects/pine-point.html">Pine Point Medical<small>consumer IV market entry</small></a>
+  <a href="projects/wise-street.html">Wise Street Capital<small>investor-ready market sizing</small></a>
+  <a href="projects/iha.html">Ithaca Health Alliance<small>donor strategy for the board</small></a>
+  <a href="projects/hershey.html">Hershey<small>battle of the brands</small></a>
+  <a href="projects/barnes-noble.html">Barnes &amp; Noble<small>why bookstores survived</small></a>
+  <a href="projects/xbox.html">Xbox Game Trials<small>try before you buy</small></a>
+  <a href="projects/disney-vail.html">Disney x Vail<small>a winter partnership</small></a>
+</div>
+
+<script>
+  // drag scraps around; a real click (no movement) opens the page
+  document.querySelectorAll('.scrap').forEach(el => {
+    let sx, sy, ox, oy, moved = false;
+    el.addEventListener('pointerdown', e => {
+      const r = el.getBoundingClientRect(), p = el.parentElement.getBoundingClientRect();
+      ox = r.left - p.left + (r.width - el.offsetWidth)/2; oy = r.top - p.top + (r.height - el.offsetHeight)/2;
+      el.style.left = ox+'px'; el.style.top = oy+'px';
+      sx = e.clientX; sy = e.clientY; moved = false;
+      el.classList.add('lift'); el.setPointerCapture(e.pointerId);
+    });
+    el.addEventListener('pointermove', e => {
+      if (!el.classList.contains('lift')) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (Math.abs(dx) + Math.abs(dy) > 6) moved = true;
+      el.style.left = ox+dx+'px'; el.style.top = oy+dy+'px';
+    });
+    el.addEventListener('pointerup', () => el.classList.remove('lift'));
+    el.addEventListener('click', e => { if (moved) e.preventDefault(); });
+  });
+</script>
+</body>
+</html>

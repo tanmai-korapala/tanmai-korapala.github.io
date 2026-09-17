@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wayfair · Tanmai</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--desk:#F7F5F0;--ink:#24211D;--pencil:#8B867C;--lilac:#A98BE8;--lilac-deep:#7F5FD6;--lilac-pale:#EEE8FB;--rule:#E4DFD4}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:var(--desk);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}
+  .top{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;font-size:13px;color:var(--pencil)}
+  .top a{color:var(--lilac-deep);text-decoration:none;font-family:"Caveat",cursive;font-size:22px}
+  .top a:hover{text-decoration:underline}
+  .page{max-width:680px;margin:20px auto 120px;padding:0 24px}
+  .kicker{font-size:14px;color:var(--pencil);margin-bottom:6px}
+  h1{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(40px,6.5vw,64px);color:var(--lilac);line-height:1.02;margin-bottom:18px}
+  .facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--pencil);padding-bottom:22px;border-bottom:1px solid var(--rule);margin-bottom:26px}
+  .facts b{color:var(--ink);font-weight:500}
+  h2{font-family:"Caveat",cursive;font-weight:500;font-size:28px;color:var(--lilac-deep);margin:30px 0 8px}
+  p{font-size:17px;line-height:1.7;margin-bottom:16px;max-width:62ch}
+  .pull{margin:26px 0;padding:18px 22px;background:var(--lilac-pale);border-left:3px solid var(--lilac);font-size:18px;line-height:1.5}
+  .next{margin-top:50px;padding-top:22px;border-top:1px solid var(--rule);font-size:15px;color:var(--pencil)}
+  .next a{color:var(--lilac-deep)}
+</style>
+</head>
+<body>
+<div class="top">
+  <a href="../projects.html">← all projects</a>
+  <a href="../index.html">my desk</a>
+</div>
+
+<main class="page">
+  <div class="kicker">Cornell Johnson capstone · January to May 2026</div>
+  <h1>Wayfair: finding $1.8M in a returns network.</h1>
+  <div class="facts">
+    <span><b>Role</b> team lead, strategy and recommendations</span>
+    <span><b>Team</b> four MBAs</span>
+    <span><b>Tools</b> MATLAB, Excel, Python</span>
+  </div>
+
+  <h2>the problem</h2>
+  <p>When you return a lamp to Wayfair, it has to go somewhere. Wayfair's small-parcel returns flow into a handful of fulfillment centers, and which one a carton gets sent to determines both the shipping cost and how quickly that facility fills up. Our team was asked a deceptively simple question: is the network routing returns the cheapest way it could, and what happens as return volume grows?</p>
+  <p>The first thing we found was that the network was already under more pressure than it looked from the outside. Returns were concentrating on far fewer facilities than the org chart suggested, one facility was carrying most of an entire coast, and projected volume growth over the next few years would push the remaining capacity to its limit. The question stopped being "can we save money" and became "how much does it cost to wait."</p>
+
+  <h2>what we built</h2>
+  <p>We built a linear programming optimizer from scratch. It takes where returns originate (roughly 900 ZIP regions across the US), how heavy they are (17 carrier weight classes), and where the candidate facilities are along with how much returns capacity each one has left. Then it decides, all at once, which facility every carton should go to in order to minimize total transportation and labor cost, under two rules: every carton must go somewhere, and no facility can exceed its storage limit.</p>
+  <p>That's about 137,700 routing decisions solved simultaneously. We could run it for any combination of facilities and any year in the projection window, and read off total cost, cost per carton, utilization at each site, and the savings versus the current setup. Building the scenario layer on top was the part I spent the most time on, because it let us answer the questions leadership actually had: what if we open three sites, what if we open five, what breaks first.</p>
+
+  <div class="pull">The model consistently sent returns from the South and Central US to facilities that don't exist in today's active network. That was the whole story: the biggest cost was a region with no coverage at all.</div>
+
+  <h2>what we found</h2>
+  <p>A projected $1.8M in annual cost savings from optimized routing in the first year alone, and a clear picture of how that number grows as inaction compounds. The efficient frontier told us most of the benefit came from the first few additional sites, not from opening everything. And the model flagged one geographically attractive facility that would hit 100% capacity the moment it was activated, which changed our recommendation from "open it" to "expand its storage allocation first, then open it."</p>
+
+  <h2>what we recommended</h2>
+  <p>Prioritize the Southeast and Central US, in a specific order, with one site as the near-term bridge and another as the anchor from the following year onward. Don't activate the capacity-constrained site without a plan for it. And be honest about what the model couldn't yet answer: we had transport and labor economics, but not the setup and fixed operating costs of a new site, so we told them exactly which three inputs would complete the ROI picture and let them calculate a break-even.</p>
+
+  <h2>what i learned</h2>
+  <p>This was the project where I learned to lead through ambiguity. Four people, competing priorities, and a problem that wasn't well framed when we got it. My job was less about the math and more about deciding what question we were actually answering, keeping finance and operations aligned on the same version of the truth, and turning a pile of model output into something a senior stakeholder could act on in twenty minutes. The final presentation landed because it told a story: the network is shrinking, here's what it costs, here's what to do first.</p>
+
+  <p class="next">Next up: <a href="general-motors.html">General Motors</a></p>
+</main>
+</body>
+</html>
